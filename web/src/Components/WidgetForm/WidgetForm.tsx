@@ -1,5 +1,21 @@
 import React from 'react';
 import CloseButton from '../CloseButton/CloseButton';
+import { Bug, DotsThreeCircle, Lightbulb } from 'phosphor-react';
+
+const feedbackTypes = {
+    BUG: {
+        title: "Problema",
+        icon: <Bug  size="36.0" color='#f4f4f5'/>
+    },
+    IDEA: {
+        title: "Ideia",
+        icon: <Lightbulb  size="36.0" color='#f4f4f5'/>
+    },
+    OTHER: {
+        title: "Outro",
+        icon: <DotsThreeCircle  size="36.0" color='#f4f4f5'/>
+    },
+}
 
 const WidgetForm: React.FC = () => {
     return (
@@ -8,7 +24,20 @@ const WidgetForm: React.FC = () => {
                 <span className='text-xl leading-6'>Deixe seu feedback</span>
                 <CloseButton />
             </header>
-            <p>Hello World</p>
+            <div className="flex py-8 gap-2 w-full">
+                {Object.entries(feedbackTypes).map(([key, value]) => {
+                    return (
+                        <button
+                            className='bg-zinc-800 rounded-lg py-5 w-24 flex flex-1 flex-col items-center gap-2 border-2 border-transparent hover:border-brand-500 focus:border-brand-500 focus:outline-none'
+                            type='button'
+                            key={key}
+                        >
+                            {value.icon}
+                            <span>{value.title}</span>
+                        </button>
+                    );
+                })}
+            </div>
             <footer>
                 Feito pelo <a className='underline underline-offset-2' href="https://github.com/LEduard0">LEduard0</a>
             </footer>
