@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import CloseButton from '../CloseButton/CloseButton';
 import { Bug, DotsThreeCircle, Lightbulb } from 'phosphor-react';
+import FeedbackTypeStep from './Steps/FeedbackTypeStep';
 
-const feedbackTypes = {
+export const feedbackTypes = {
     BUG: {
         title: "Problema",
         icon: <Bug size="36.0" color='#f4f4f5' />
@@ -17,7 +18,7 @@ const feedbackTypes = {
     },
 }
 
-type FeedbackType = keyof typeof feedbackTypes;
+export type FeedbackType = keyof typeof feedbackTypes;
 
 const WidgetForm: React.FC = () => {
     const [feedbackType, setFeedbackType] = useState<FeedbackType | null>(null)
@@ -29,25 +30,9 @@ const WidgetForm: React.FC = () => {
                 <CloseButton />
             </header>
             {!feedbackType ? (
-                <div className="flex py-8 gap-2 w-full">
-                    {Object.entries(feedbackTypes).map(([key, { icon, title }]) => {
-                        return (
-                            <button
-                                className='bg-zinc-800 rounded-lg py-5 w-24 flex flex-1 flex-col items-center gap-2 border-2 border-transparent hover:border-brand-500 focus:border-brand-500 focus:outline-none'
-                                type='button'
-                                key={key}
-                                onClick={() => {
-                                    setFeedbackType(key as FeedbackType)
-                                }}
-                            >
-                                {icon}
-                                <span>{title}</span>
-                            </button>
-                        );
-                    })}
-                </div>
+                <FeedbackTypeStep onFeedbackTypeChanged={setFeedbackType} />
             ) : (
-                <div></div>
+                <div>teste</div>
             )}
             <footer>
                 Feito pelo <a className='underline underline-offset-2' href="https://github.com/LEduard0">LEduard0</a>
