@@ -5,11 +5,12 @@ import ScreenshotButton from '../../ScreenshotButton/ScreenshotButton';
 import { FeedbackType, feedbackTypes } from '../WidgetForm';
 
 interface FeedbackContentStepProps {
-  feedbackType: FeedbackType;
+  feedbackType: FeedbackType
   onFeedbackRestartRequested: () => void
+  onFeedbackSent: () => void
 }
 
-const FeedbackContentStep: React.FC<FeedbackContentStepProps> = ({ feedbackType, onFeedbackRestartRequested }) => {
+const FeedbackContentStep: React.FC<FeedbackContentStepProps> = ({ feedbackType, onFeedbackRestartRequested, onFeedbackSent }) => {
   const { title, icon } = feedbackTypes[feedbackType]
   const [screenshot, setScreeenshot] = useState<string | null>(null)
   const [comment, setComment] = useState<string | null>(null)
@@ -17,6 +18,8 @@ const FeedbackContentStep: React.FC<FeedbackContentStepProps> = ({ feedbackType,
   const handleSubmitFeedback = (event: FormEvent) => {
     event.preventDefault()
     console.log(comment, screenshot)
+
+    onFeedbackSent()
   }
 
   return (
